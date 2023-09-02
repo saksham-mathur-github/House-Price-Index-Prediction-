@@ -30,6 +30,8 @@ demand_data = demand_data.dropna()
 # Rename 'DATE' column in demand_data to match supply_data
 demand_data.rename(columns={'DATE': 'Period'}, inplace=True)
 # If needed, further preprocess demand_data here
+# Convert 'Period' column to datetime
+demand_data['Period'] = pd.to_datetime(demand_data['Period'], format='%d-%m-%Y')
 
 # Merge supply and demand data on 'Period'
 merged_data = pd.merge(supply_data, demand_data, on='Period', how='inner')
