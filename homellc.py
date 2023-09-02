@@ -103,11 +103,12 @@ for feature in X.columns:
     min_val = float(X_test[feature].min())  # Cast min value to float
     max_val = float(X_test[feature].max())  # Cast max value to float
 
+    # Explicitly specify the data type as float
     sliders[feature] = st.slider(
         label=f'{feature}:',
         min_value=min_val,
         max_value=max_val,
-        value=X_test[feature].mean(),
+        value=float(X_test[feature].mean()),  # Cast the initial value to float
         step=0.01,
     )
 
