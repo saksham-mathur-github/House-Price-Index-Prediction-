@@ -18,8 +18,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Load the supply and demand data
-supply_data = pd.read_csv('C:/Users/SAKSHAM/Downloads/supply_data.csv')
-demand_data = pd.read_csv('C:/Users/SAKSHAM/Downloads/demand_data.csv')
+supply_data = pd.read_csv('supply_data.csv')
+demand_data = pd.read_csv('demand_data.csv')
 
 # Data cleaning and preprocessing for supply_data
 supply_data = supply_data.dropna()
