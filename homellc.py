@@ -29,12 +29,14 @@ supply_data = supply_data.dropna()
 demand_data = demand_data.dropna()
 # Rename 'DATE' column in demand_data to match supply_data
 demand_data.rename(columns={'DATE': 'Period'}, inplace=True)
-# If needed, further preprocess demand_data here
+
 # Convert 'Period' column to datetime
 demand_data['Period'] = pd.to_datetime(demand_data['Period'], format='%d-%m-%Y')
 
-# Merge supply and demand data on 'Period'
-merged_data = pd.merge(supply_data, demand_data, on='Period', how='inner')
+# If needed, further preprocess demand_data here
+
+# Concatenate supply and demand data
+merged_data = pd.concat([supply_data, demand_data], axis=1)
 
 # Define the independent variables (features)
 X = merged_data.drop(['Period', 'HPI'], axis=1)
@@ -47,7 +49,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 # Calculate correlations
 correlation = merged_data.corr()['HPI']
-
 
 # Initialize the Decision Tree Regressor model and fit it to the training data
 model = DecisionTreeRegressor(random_state=42)
