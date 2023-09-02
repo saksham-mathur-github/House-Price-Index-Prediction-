@@ -32,6 +32,7 @@ demand_data.rename(columns={'DATE': 'Period'}, inplace=True)
 
 # Convert 'Period' column to datetime
 demand_data['Period'] = pd.to_datetime(demand_data['Period'], format='%d-%m-%Y')
+supply_data['Period'] = pd.to_datetime(supply_data['Period'], format='%d-%m-%Y')
 
 # If needed, further preprocess demand_data here
 
