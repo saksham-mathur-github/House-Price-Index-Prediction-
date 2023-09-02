@@ -39,6 +39,9 @@ supply_data['Period'] = pd.to_datetime(supply_data['Period'], format='%d-%m-%Y')
 # Concatenate supply and demand data
 merged_data = pd.concat([supply_data, demand_data], axis=1)
 
+# Drop rows with missing values in the target variable 'HPI'
+merged_data = merged_data.dropna(subset=['HPI'])
+
 # Define the independent variables (features)
 X = merged_data.drop(['Period', 'HPI'], axis=1)
 
@@ -48,13 +51,9 @@ y = merged_data['HPI']
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Calculate correlations
-correlation = merged_data.corr()['HPI']
-
 # Initialize the Decision Tree Regressor model and fit it to the training data
 model = DecisionTreeRegressor(random_state=42)
 model.fit(X_train, y_train)  # Fit the model to the training data
-
 
 # Create a function to update and visualize predictions
 def update_predictions(**kwargs):
